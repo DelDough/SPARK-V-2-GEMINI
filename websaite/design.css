@@ -1,0 +1,139 @@
+body{
+   margin: 0;
+   padding: 0;
+   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+   color: #252526;
+   background: rgb(255,247,247);
+   background: linear-gradient(90deg, rgba(255,247,247,1) 0%, rgba(201,249,255,1) 16%, rgba(255,255,255,1) 43%);
+   justify-content: space-evenly;
+   align-content: center;
+   flex-direction: column;
+}
+
+button{
+   color: #252526;
+   height: 2rem;
+   width: 5rem;
+   float: right;
+   margin-top: 15px;
+   border: none;
+   border-radius: 10px;
+   margin-left: 10px;
+}
+
+button:hover{
+   background-color:darkgray
+}
+
+button:focus {
+   background-color: #252526;
+   color: #edf1f7;
+}
+
+.darkmode{
+   animation: fadeBackground 0s;
+   animation-fill-mode: forwards;
+}
+
+
+@keyframes fadeBackground {
+   from {background: radial-gradient(circle, rgba(62,60,60,1) 0%, rgba(99,67,125,1) 43%, rgba(62,60,60,1) 80%);}
+   to {background: radial-gradient(circle, rgba(255,247,247,1) 0%, rgba(201,249,255,1) 43%, rgba(255,255,255,1) 80%);}
+   
+}
+
+
+header{
+   border-bottom-style:solid ;
+   padding: 10px;
+   text-align: center;
+   overflow: hidden;
+   
+}
+
+.htext{
+   float: left;
+   letter-spacing: 5px;
+}
+
+.footer{
+   border-top-style:solid ;
+   position: absolute;
+   padding: 10px;
+   width: 100%;
+   z-index: 10;
+   bottom: 0;
+   left: 0;
+}
+
+.ftext{
+   float: left;
+}
+
+.ctext{
+   margin-top: 5%;
+   margin-left: 45%;
+   display: inline-block;
+}
+
+.smltxt{
+   font-size: small;
+   color: gray;
+}
+
+input[type=text] {
+padding: 12px 20px;
+font-size: 20px;
+line-height: 20px;
+color: #24292e;
+vertical-align: middle;
+background-color: #ffffff;
+background-repeat: no-repeat;
+background-position: right 8px center;
+border: 1px solid #e1e4e8;
+border-radius: 6px;
+outline: none;
+box-shadow: rgba(225, 228, 232, 0.2) 0px 1px 0px 0px inset;
+margin-left: 40%;
+width: 20%;
+
+}
+
+input:focus{
+    border-color: #252526;
+    outline: none;
+    box-shadow: rgba(3, 102, 214, 0.3) 0px 0px 0px 3px;
+}
+
+.submit{
+   cursor: pointer;
+   padding: 12px;
+   border-radius: 6px;
+   outline: 1px;
+}
+
+.tw h1 {
+   overflow: hidden; /* Ensures the content is not revealed until the animation */
+   white-space: nowrap; /* Keeps the content on a single line */
+   margin: 0 auto; /* Gives that scrolling effect as the typing happens */
+   letter-spacing: .10em; /* Adjust as needed */
+   animation: 
+   typing 2s steps(20, end),
+   blink-caret .75s step-end infinite;
+   border-right: .15em solid#24292e;
+ }
+
+ @keyframes typing {
+   from { width: 0 }
+   to { width: 100% }
+ }
+
+ @keyframes blink-caret{
+   from, to { border-color: transparent }
+   50% { border-color:#24292e }
+ }
+
+ .alert {
+   font-size: medium;
+   color: #24292e
+ }
