@@ -1,6 +1,10 @@
+// Import Gemini API at the top of function.js
+import { GoogleGenerativeAI } from "@google/generative-ai";
+const genAI = new GoogleGenerativeAI("YOUR_API_KEY");
+const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+
 function myFunction() {
     document.body.classList.toggle('dark-mode');
-    // Save preference to localStorage
     const isDark = document.body.classList.contains('dark-mode');
     localStorage.setItem('darkMode', isDark);
 }
@@ -10,6 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (localStorage.getItem('darkMode') === 'true') {
         document.body.classList.add('dark-mode');
     }
+    loadResults();
 });
 
 async function submit() {
@@ -18,60 +23,66 @@ async function submit() {
     const alertDiv = document.getElementById('alert');
     
     if (!input.value.trim()) {
-        alertDiv.textContent = "Please enter a question";
+        alert("Please enter a question");
         return;
     }
     
-    // Disable input and button while processing
-    input.disabled = true;
+    // Show loading state
     submitBtn.disabled = true;
     submitBtn.textContent = 'Thinking...';
     alertDiv.textContent = "Processing your question...";
     
     try {
-        const response = await fetch('YOUR_API_ENDPOINT', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ prompt: input.value })
-        });
+        // Get response from Gemini
+        const result = await model.generateContent(input.value);
+        const response = await result.response.text();
         
-        const data = await response.json();
-        alertDiv.textContent = data.response;
+        // Store data before redirect
+        localStorage.setItem('userQuestion', input.value);
+        localStorage.setItem('sparkResponse', response);
+        
+        // Redirect to results page
+        window.location.href = 'results.html';
     } catch (error) {
-        alertDiv.textContent = "An error occurred. Please try again.";
-    } finally {
-        // Re-enable input and button
-        input.disabled = false;
+        alertDiv.textContent = "Error: " + error.message;
         submitBtn.disabled = false;
         submitBtn.textContent = 'Ask SPARK';
-        input.focus();
+    }
+}
+
+// Add this function to load results
+function loadResults() {
+    if (window.location.pathname.includes('results.html')) {
+        const questionEl = document.getElementById('userQuestion');
+        const responseEl = document.getElementById('sparkResponse');
+        
+        questionEl.textContent = localStorage.getItem('userQuestion');
+        responseEl.textContent = localStorage.getItem('sparkResponse');
     }
 }
 
 async function generateStudyMaterial() {
-    const input = document.getElementById('inputid').value;
-    const alertDiv = document.getElementById('alert');
+    const input = document.getElementById('inputid');
+    
+    if (!input.value.trim()) {
+        alert("Please enter a topic for the study guide");
+        return;
+    }
+    
+    // Store question for results page
+    localStorage.setItem('userQuestion', `Generate study guide: ${input.value}`);
     
     try {
-        const prompt = `Create a comprehensive study guide about: ${input}. Include key points, definitions, and examples.`;
+        const prompt = `Create a comprehensive study guide about: ${input.value}. Include key points, definitions, and examples.`;
         const result = await model.generateContent(prompt);
         const content = result.response.text();
         
-        // Create downloadable file
-        const blob = new Blob([content], { type: 'text/plain' });
-        const url = window.URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = `study_guide_${input.slice(0,30)}.txt`;
-        a.click();
-        window.URL.revokeObjectURL(url);
-        
-        alertDiv.textContent = "Study guide generated and downloaded!";
+        // Store response and redirect
+        localStorage.setItem('sparkResponse', content);
+        window.location.href = 'results.html';
     } catch (error) {
-        alertDiv.textContent = "Error generating study guide: " + error.message;
+        alert("Error generating study guide: " + error.message);
     }
 }
 
-export { myFunction, submit, generateStudyMaterial };
+export { myFunction, submit, generateStudyMaterial, loadResults };

@@ -97,11 +97,7 @@ header {
     color: gray;
 }
 
-/* Remove the conflicting input[type=text] styles */
-input[type=text] {
-    /* Delete or comment out this entire block as it's interfering with .search-input */
-}
-
+/* Input styles are handled by .search-input class */
 input:focus {
     border-color: #252526;
     outline: none;
@@ -171,6 +167,7 @@ input:focus {
 /* Update logo color */
 .logo {
     background: var(--primary-gradient);
+    background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     font-weight: 600;
@@ -504,4 +501,64 @@ body.dark-mode .file-label {
 body.dark-mode .upload-btn {
     background: var(--primary-gradient);
     color: white;
+}
+
+/* Results page styles */
+.results-section {
+    padding: 2rem 5%;
+    margin-top: 80px;
+}
+
+.results-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    background: var(--bg-color);
+    border-radius: 16px;
+    box-shadow: var(--shadow);
+    padding: 2rem;
+}
+
+.question-section {
+    margin-bottom: 2rem;
+    padding-bottom: 2rem;
+    border-bottom: 2px solid #eee;
+}
+
+.question-title, .answer-title {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: var(--text-color);
+}
+
+.question-text {
+    font-size: 1.2rem;
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+.answer-section {
+    margin-bottom: 2rem;
+}
+
+.response-text {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: var(--text-color);
+    white-space: pre-wrap;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 2rem;
+}
+
+/* Dark mode support for results page */
+body.dark-mode .results-container {
+    background: #2d2d2d;
+}
+
+body.dark-mode .question-section {
+    border-bottom-color: #444;
 }
