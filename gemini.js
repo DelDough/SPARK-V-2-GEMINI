@@ -1,22 +1,16 @@
+// Import mini API
 import { GoogleGenerativeAI } from "@google/generative-ai";
-const genAI = new GoogleGenerativeAI("AIzaSyD0LVIthyXuQpepTWt2eOhPxGTKAS6ET2g");
+const genAI = new GoogleGenerativeAI("AIzaSyD0LVIthyXuQpepTWt2eOhPxGTAS6ET2g");
+const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
 
-const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash",
-            systemInstruction: ""
- });
-
-const prompt = "write a haiku about art and society";
-
-const result = await model.generateContent(prompt);
-console.log(result.response.text());
-
-
-function myFunction() {
-    var element = document.body;
-    element.classList.toggle("darkmode");
+async function submit() {
+  const input = document.getElementById('inputid').value;
+  const alertDiv = document.getElementById('alert');
+  
+  try {
+    const result = await model.generateContent(input);
+    alertDiv.textContent = result.response.text();
+  } catch (error) {
+    alertDiv.textContent = "Error: " + error.message;
   }
-
-function submit() {
-  var x = document.getElementById('inputid').value;
-  console.log(x)
 }

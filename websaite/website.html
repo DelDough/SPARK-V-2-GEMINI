@@ -5,33 +5,69 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SPARK</title>
     <link rel="stylesheet" href="design.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <!-- Add Google AI SDK -->
+    <script src="https://generativelanguage.googleapis.com/v1beta/models/gemini-pro?key=AIzaSyD0LVIthyXuQpepTWt2eOhPxGTKAS6ET2g"></script>
+    <!-- Load functions after SDK -->
+    <script type="module" src="function.js" defer></script>
 </head>
-<header>
-    <div class="htext">
-        <h1>SPARK</h1>
-    </div>
-        <button onclick="myFunction()"> Darkmode </button>
-        <button> About Us </button>
-        <button> Login </button>
-</header>
 <body>
-    <script src="function.js"></script>
-        <div class="ctext">
-            <div class="tw">
-            <h1>Ask me anything.</h1>
+    <nav class="navbar">
+        <div class="logo">SPARK</div>
+        <div class="nav-buttons">
+            <button onclick="myFunction()" class="nav-btn">Dark mode</button>
+            <button class="nav-btn">About Us</button>
+            <button class="nav-btn primary">Login</button>
+        </div>
+    </nav>
+
+    <main class="hero-section">
+        <h1 class="main-title">Ask me anything.</h1>
+        <p class="subtitle">Your AI-powered knowledge companion</p>
+        <div class="search-container">
+            <div class="input-wrapper">
+                <input 
+                    id="inputid" 
+                    type="text" 
+                    placeholder="Type your question here..." 
+                    class="search-input"
+                    autocomplete="off"
+                    aria-label="Question input"
+                >
+                <label for="fileInput" class="upload-btn" aria-label="Upload document">+</label>
+                <input 
+                    type="file" 
+                    id="fileInput" 
+                    class="file-input"
+                    accept=".txt,.pdf,.doc,.docx"
+                    hidden
+                >
+            </div>
+            <div class="button-group">
+                <button 
+                    class="submit-btn" 
+                    onclick="submit()"
+                    aria-label="Submit question"
+                >
+                    Ask SPARK
+                </button>
+                <button 
+                    class="submit-btn study-btn" 
+                    onclick="generateStudyMaterial()"
+                    aria-label="Generate study material"
+                >
+                    Generate Study Guide
+                </button>
             </div>
         </div>
-            <input id="inputid" type="text" size="30" class=".advancedSearchTextb">
-            <input type="button" value="submit" class="submit" onclick="submit()">
-            <div id="alert" class="alert"></div>
-    </script>
+        
+        <div id="alert" class="response-container"></div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p>KFA &copy; All rights reserved</p>
+        </div>
+    </footer>
 </body>
-<div class="footer">
-    <div class="ftext">
-        <h2>KFA &#169</h2>
-            <div class="smltxt">
-                all rights reserved
-            </div>
-    </div>
-</div>
 </html>
