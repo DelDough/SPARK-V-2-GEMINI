@@ -25,6 +25,13 @@ body {
     align-content: center;
 }
 
+.img-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    filter: invert(35%) sepia(11%) saturate(6207%) hue-rotate(210deg) brightness(95%) contrast(94%);
+}
 button {
     color: #252526;
     height: 2rem;
@@ -43,20 +50,6 @@ button:hover {
 button:focus {
     background-color: #252526;
     color: #edf1f7;
-}
-
-.darkmode {
-    animation: fadeBackground 0s;
-    animation-fill-mode: forwards;
-}
-
-@keyframes fadeBackground {
-    from {
-        background: radial-gradient(circle, rgba(62, 60, 60, 1) 0%, rgba(99, 67, 125, 1) 43%, rgba(62, 60, 60, 1) 80%);
-    }
-    to {
-        background: radial-gradient(circle, rgba(255, 247, 247, 1) 0%, rgba(201, 249, 255, 1) 43%, rgba(255, 255, 255, 1) 80%);
-    }
 }
 
 header {
@@ -79,7 +72,7 @@ header {
     position: fixed;
     bottom: 0;
     width: 100%;
-    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);;
 }
 
 .ftext {
@@ -120,24 +113,6 @@ input:focus {
     border-right: .15em solid #24292e;
 }
 
-@keyframes typing {
-    from {
-        width: 0
-    }
-    to {
-        width: 100%
-    }
-}
-
-@keyframes blink-caret {
-    from,
-    to {
-        border-color: transparent
-    }
-    50% {
-        border-color: #24292e
-    }
-}
 
 .alert {
     font-size: medium;
@@ -443,9 +418,14 @@ body.dark-mode .response-container {
     color: #fff;
 }
 
+body.dark-mode .img-container {
+        filter: invert(100%) sepia(11%) saturate(6207%) hue-rotate(210deg) brightness(95%) contrast(94%);
+}
+
 /* Update dark mode for typewriter effect */
 body.dark-mode .main-title {
     border-right-color: #fff;
+    color: #424549;
 }
 
 /* Update dark mode styles */
@@ -459,6 +439,7 @@ body.dark-mode .file-label {
 }
 
 /* New styles */
+
 .input-wrapper {
     position: relative;
     width: 100%;
